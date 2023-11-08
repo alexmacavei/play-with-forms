@@ -90,11 +90,11 @@ export class ConceptFormComponent {
     const filteredAlternativeNames = filteredKeys
       .map((k) => ({ [k]: alternativeNames[k] }))
       .reduce((p, c) => ({ ...p, ...c }), {});
-    this.formValue.update(old => ({
+    this.formValue.update((old) => ({
       ...old,
       alternativeNames: { ...filteredAlternativeNames },
     }));
   }
 
-  protected tracker = (i: number) => i;
+  protected tracker = (_: number, item: { key: string }) => item.key;
 }

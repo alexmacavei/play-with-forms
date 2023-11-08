@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  WritableSignal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InternalNotes, statuses } from '@systematic/concept-model';
 import { ControlContainer, FormsModule, NgForm } from '@angular/forms';
@@ -29,18 +24,9 @@ import { getLastNumber } from '../app.config';
         <div *ngFor="let nkv of formValue().notes | keyvalue; trackBy: tracker">
           <label>
             <span class="mr-3.5">Note</span>
-            <input
-              [ngModel]="formValue().notes?.[nkv.key] || ''"
-              name="{{ nkv.key }}"
-            />
+            <input [ngModel]="formValue().notes?.[nkv.key] || ''" name="{{ nkv.key }}" />
           </label>
-          <button
-            type="button"
-            class="ml-2 btn-pill"
-            (click)="removeNote(nkv.key)"
-          >
-            -
-          </button>
+          <button type="button" class="ml-2 btn-pill" (click)="removeNote(nkv.key)">-</button>
         </div>
       </div>
       <button class="btn-primary" (click)="addNote()">Add note</button>
@@ -79,5 +65,5 @@ export class InternalNotesComponent {
     });
   }
 
-  tracker = (i: number) => i;
+  tracker = (_: number, item: {key: string}) => item.key;
 }
