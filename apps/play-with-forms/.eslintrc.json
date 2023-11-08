@@ -13,7 +13,6 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "playWithForms",
             "style": "camelCase"
           }
         ],
@@ -21,7 +20,6 @@
           "error",
           {
             "type": "element",
-            "prefix": "play-with-forms",
             "style": "kebab-case"
           }
         ]

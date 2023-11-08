@@ -1,0 +1,84 @@
+{
+  "name": "play-with-template-forms",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "play-with-forms",
+  "sourceRoot": "apps/play-with-template-forms/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser-esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/play-with-template-forms",
+        "index": "apps/play-with-template-forms/src/index.html",
+        "main": "apps/play-with-template-forms/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/play-with-template-forms/tsconfig.app.json",
+        "assets": [
+          "apps/play-with-template-forms/src/favicon.ico",
+          "apps/play-with-template-forms/src/assets"
+        ],
+        "styles": ["apps/play-with-template-forms/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 4201
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "play-with-template-forms:build:production"
+        },
+        "development": {
+          "browserTarget": "play-with-template-forms:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "play-with-template-forms:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/play-with-template-forms/**/*.ts",
+          "apps/play-with-template-forms/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/play-with-template-forms/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  }
+}

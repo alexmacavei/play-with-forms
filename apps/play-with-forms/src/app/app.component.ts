@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import {ConceptContainerComponent} from "./concept/concept-container.component";
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [RouterModule, ConceptContainerComponent],
   selector: 'play-with-forms-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
