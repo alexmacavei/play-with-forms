@@ -7,10 +7,7 @@ export const conceptLabels: { [Property in ConceptType]: string } = {
   INDIVIDUAL_CONCEPT: 'Individual concept',
   CONCEPT: 'Concept',
 };
-export type IndividualConceptType =
-  | 'SCIENTIFIC_BRANCH'
-  | 'GENERAL'
-  | 'PHILOSOPHICAL_CONCEPT';
+export type IndividualConceptType = 'SCIENTIFIC_BRANCH' | 'GENERAL' | 'PHILOSOPHICAL_CONCEPT';
 export const individualConceptLabels: {
   [Property in IndividualConceptType]: string;
 } = {
@@ -18,6 +15,14 @@ export const individualConceptLabels: {
   PHILOSOPHICAL_CONCEPT: 'Philosophical concept',
   SCIENTIFIC_BRANCH: 'Scientific branch',
 };
+
+export function getConcept(key: ConceptType) {
+  return conceptLabels[key];
+}
+
+export function getIndividualConcept(key: IndividualConceptType) {
+  return individualConceptLabels[key];
+}
 
 export type Concept = Partial<
   Description &

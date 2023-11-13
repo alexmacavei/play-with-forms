@@ -1,7 +1,15 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Concept, conceptLabels } from '@systematic/concept-model';
+import {
+  Concept,
+  conceptLabels,
+  ConceptType,
+  getConcept,
+  getIndividualConcept,
+  individualConceptLabels,
+  IndividualConceptType,
+} from '@systematic/concept-model';
 import { FormDirective } from '../directives/form.directive';
 import { InternalNotesComponent } from './internal-notes.component';
 import { ReusableDescriptionComponent } from './reusable-description.component';
@@ -12,7 +20,7 @@ import { getLastNumber } from '../app.config';
   standalone: true,
   imports: [CommonModule, FormsModule, FormDirective, InternalNotesComponent, ReusableDescriptionComponent],
   template: `
-    <div class="flex-col flex card">
+    <div class="flex-col flex card min-w-[550px]">
       <div class="flex justify-center">
         <h1 class="h-4 m-5 text-xl font-bold underline">Concept Form</h1>
       </div>
@@ -42,8 +50,17 @@ import { getLastNumber } from '../app.config';
             <label>Concept type</label>
             <select class="ml-2 selector" name="conceptType" [ngModel]="formValue().conceptType">
               <option></option>
-              <option *ngFor="let conceptType of conceptTypes">
-                {{ conceptType }}
+              <option *ngFor="let conceptType of conceptTypes" [value]="conceptType">
+                {{ getConcept(conceptType) }}
+              </option>
+            </select>
+          </div>
+          <div class="p-2" *ngIf="shouldShowIndividualConceptTypeSelector()">
+            <label>Individual concept type</label>
+            <select class="ml-2 selector" name="individualConceptType" [ngModel]="formValue().individualConceptType">
+              <option></option>
+              <option *ngFor="let individualConceptType of individualConceptTypes" [value]="individualConceptType">
+                {{ getIndividualConcept(individualConceptType) }}
               </option>
             </select>
           </div>
@@ -61,7 +78,13 @@ import { getLastNumber } from '../app.config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConceptFormComponent {
-  conceptTypes = Object.values(conceptLabels);
+  conceptTypes = Object.keys(conceptLabels);
+  individualConceptTypes = Object.keys(individualConceptLabels);
+
+  getConcept = (type: string) => getConcept(type as ConceptType);
+  getIndividualConcept = (type: string) => getIndividualConcept(type as IndividualConceptType);
+
+  shouldShowIndividualConceptTypeSelector = computed(() => this.formValue().conceptType === 'INDIVIDUAL_CONCEPT');
 
   formValue = signal<Concept>({});
 

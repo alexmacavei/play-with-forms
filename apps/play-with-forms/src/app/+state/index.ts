@@ -5,11 +5,8 @@ import {
   on,
   props,
 } from '@ngrx/store';
-import {
-  ConceptType,
-  IndividualConceptType,
-} from '../concept/concept-container.component';
 import { Status } from '../concept/status-info.component';
+import { ConceptType, IndividualConceptType } from "@systematic/concept-model";
 
 export const conceptStateFeatureKey = 'conceptState';
 
@@ -55,5 +52,5 @@ export const conceptActions = createActionGroup({
 
 export const conceptReducer = createReducer(
   initialState,
-  on(conceptActions.setState, (state, action) => ({ ...action }))
+  on(conceptActions.setState, (state, action) => ({ ...action })),
 );
