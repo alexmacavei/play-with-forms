@@ -70,7 +70,7 @@ import { getLastNumber } from '../app.config';
       </form>
       <pre>{{ formValue() | json }}</pre>
       <div class="flex justify-center">
-        <button class="btn-primary" type="submit">Submit</button>
+        <button class="btn-primary" type="submit" (click)="onSubmit()">Submit</button>
       </div>
     </div>
   `,
